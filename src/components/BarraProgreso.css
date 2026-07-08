@@ -1,0 +1,43 @@
+/* Progress Bar Layout */
+.progress-container {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  width: 100%;
+  min-width: 140px; /* Ensures it looks good on desktop */
+}
+
+/* The grey/dark background track */
+.progress-bar-track {
+  background-color: #374151; /* Dark gray track */
+  border-radius: 9999px;
+  height: 8px;
+  flex-grow: 1; /* Takes up the available space */
+  overflow: hidden; /* Clips the inner bar edges nicely */
+}
+
+/* The colorful filled portion */
+.progress-bar-fill {
+  background: linear-gradient(90deg, var(--neon-purple), var(--neon-cyan));
+  height: 100%;
+  border-radius: 9999px;
+  transition: width 0.4s ease-out; /* Smooth transition if numbers change */
+  box-shadow: 0 0 8px rgba(6, 182, 212, 0.6); /* Subtle neon glow */
+}
+
+/* The text percentage */
+.progress-text {
+  font-family: monospace;
+  font-size: 0.85rem;
+  color: var(--text-light);
+  min-width: 35px; /* Prevents text alignment shifts */
+  text-align: right;
+}
+
+/* Responsive adjustment for mobile screen layout */
+@media screen and (max-width: 768px) {
+  .progress-container {
+    width: 60%; /* Keeps it compact inside the mobile card view */
+    justify-content: flex-end;
+  }
+}

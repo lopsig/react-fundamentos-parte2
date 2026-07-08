@@ -1,4 +1,5 @@
 import "./TablaVideojuegos.css"
+import { BarraProgreso } from "./BarraProgreso"
 
 export const TablaVideojuegos = ({ videojuegos }) => {
   return (
@@ -37,7 +38,9 @@ export const TablaVideojuegos = ({ videojuegos }) => {
                       {vid.disponible ? 'Disponible' : 'Agotado'}
                     </span>
                   </td>
-                  <td data-label="Progreso">{vid.progreso}%</td>
+                  <td data-label="Progreso">
+                    <BarraProgreso porcentaje={vid.progreso * 100} />
+                  </td>
                 </tr>
               ))
             }
