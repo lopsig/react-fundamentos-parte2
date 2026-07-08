@@ -112,6 +112,12 @@
 
 /* --- Responsive Layout (Mobile Cards) --- */
 @media screen and (max-width: 768px) {
+  /* Reduce container padding so we have more horizontal space */
+  .game-container {
+    padding: 1rem 0.5rem;
+    margin: 1rem;
+  }
+
   .game-table thead {
     display: none;
   }
@@ -119,20 +125,35 @@
   .game-table, .game-table tbody, .game-table tr, .game-table td {
     display: block;
     width: 100%;
+    box-sizing: border-box; /* Ensures padding doesn't cause overflow */
   }
 
   .game-table tr {
-    border-bottom: 2px solid #374151;
-    padding: 1rem 0;
+    border: 1px solid #374151;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    padding: 0.5rem 0;
+    background-color: var(--card-bg);
   }
 
   .game-table td {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-none: none;
-    padding: 0.5rem 1rem;
+    border-bottom: 1px dashed #374151;
+    padding: 0.75rem 1rem;
     text-align: right;
+    gap: 1rem; /* Adds a safe gap between the label and the value */
+  }
+
+  .game-table td:last-child {
+    border-bottom: none;
+  }
+
+  /* Make sure long text wraps to the next line instead of cutting off */
+  .game-title, .game-table td {
+    word-break: break-word; 
+    white-space: normal;
   }
 
   .game-table td::before {
@@ -142,5 +163,14 @@
     text-transform: uppercase;
     font-size: 0.8rem;
     text-align: left;
+    min-width: 100px; /* Gives the label a fixed minimum space */
+    flex-shrink: 0;   /* Prevents the label from squishing */
+  }
+
+  /* Fix progress container width for mobile */
+  .progress-container {
+    width: 100%;
+    max-width: 180px; /* Limits the bar size so it doesn't crowd out space */
+    justify-content: flex-end;
   }
 }
