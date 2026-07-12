@@ -1,7 +1,13 @@
 import "./TablaVideojuegos.css"
 import { BarraProgreso } from "./BarraProgreso"
+import { useNavigate } from "react-router-dom"
 
-export const TablaVideojuegos = ({ videojuegos }) => {
+export const TablaVideojuegos = ({ videojuegos, onEliminar }) => {
+  
+  const navigate = useNavigate();
+  const manejarEditar = (vid) => {
+    navigate("/editar",{state: {videojuego : vid}})
+  }
   return (
     <div className="game-container">
       <div className="game-header">
@@ -22,6 +28,7 @@ export const TablaVideojuegos = ({ videojuegos }) => {
               <th>Precio</th>
               <th>Disponibilidad</th>
               <th>Progreso</th>
+              <th>Acciones</th>
             </tr>
           </thead>
           <tbody>
@@ -40,6 +47,10 @@ export const TablaVideojuegos = ({ videojuegos }) => {
                   </td>
                   <td data-label="Progreso">
                     <BarraProgreso porcentaje={vid.progreso * 100} />
+                  </td>
+                  <td>
+                    <button onClick={() => manejarEditar(vid)}>Editar</button>
+                    <button onClick={() => onEliminar(vid.id)}>Eliminar</button>
                   </td>
                 </tr>
               ))
