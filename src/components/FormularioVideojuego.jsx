@@ -13,7 +13,7 @@ export const FormularioVideojuego = ({ onGuardar }) => {
   const [plataforma, setPlataforma] = useState("")
   const [lanzamiento, setLanzamiento] = useState("")
   const [precio, setPrecio] = useState("")
-  const [disponibilidad, setDisponibilidad] = useState(true)
+  const [disponible, setDisponible] = useState(true)
   const [progreso, setProgreso] = useState(0.0)
 
   //# EFECTO
@@ -25,7 +25,7 @@ export const FormularioVideojuego = ({ onGuardar }) => {
       setPlataforma(videojuegoRecuperado.plataforma)
       setLanzamiento(videojuegoRecuperado.lanzamiento)
       setPrecio(videojuegoRecuperado.precio)
-      setDisponibilidad(videojuegoRecuperado.disponibilidad)
+      setDisponible(videojuegoRecuperado.disponible)
       setProgreso(videojuegoRecuperado.progreso)
     } else {
       setTitulo("")
@@ -33,7 +33,7 @@ export const FormularioVideojuego = ({ onGuardar }) => {
       setPlataforma("")
       setLanzamiento("")
       setPrecio("")
-      setDisponibilidad("")
+      setDisponible("")
       setProgreso("")
     }
   
@@ -49,7 +49,7 @@ export const FormularioVideojuego = ({ onGuardar }) => {
       plataforma: plataforma,
       lanzamiento: lanzamiento,
       precio: precio,
-      disponibilidad: disponibilidad,
+      disponible: disponible,
       progreso: progreso
     }
 
@@ -103,7 +103,7 @@ export const FormularioVideojuego = ({ onGuardar }) => {
         onChange={(e) => setPrecio(e.target.value)}
       />
       <label>
-        Disponible?: <input type="checkbox" checked={disponibilidad} onChange={(e) => setDisponibilidad(e.target.checked)} />
+        Disponible?: <input type="checkbox" checked={disponible} onChange={(e) => setDisponible(e.target.checked)} />
       </label>
       <label>Progreso</label>
       <input

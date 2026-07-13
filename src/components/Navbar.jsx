@@ -5,7 +5,7 @@ export const Navbar = () => {
     <nav>
       <div>
         <Link to = "/">VideoJuegos</Link>
-        <Link to = "/nuevo">Nuevo VideoJuegos</Link>
+        <Link to = "/registrar-juego">Nuevo VideoJuego</Link>
       </div>
     </nav>
   )

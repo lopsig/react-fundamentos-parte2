@@ -6,7 +6,7 @@ export const TablaVideojuegos = ({ videojuegos, onEliminar }) => {
   
   const navigate = useNavigate();
   const manejarEditar = (vid) => {
-    navigate("/editar",{state: {videojuego : vid}})
+    navigate("/editar-juego",{state: {videojuego : vid}})
   }
   return (
     <div className="game-container">
