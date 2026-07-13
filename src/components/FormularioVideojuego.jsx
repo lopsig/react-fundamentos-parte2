@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom"
+import "./FormularioVideojuego.css"
 
 export const FormularioVideojuego = ({ onGuardar }) => {
   //# CONSTANTES GLOBALES  
@@ -30,11 +31,11 @@ export const FormularioVideojuego = ({ onGuardar }) => {
     } else {
       setTitulo("")
       setGenero("")
-      setPlataforma("")
+      setPlataforma("PlayStation")
       setLanzamiento("")
       setPrecio("")
-      setDisponible("")
-      setProgreso("")
+      setDisponible(true)
+      setProgreso(0)
     }
   
   }, [videojuegoRecuperado])
@@ -63,22 +64,35 @@ export const FormularioVideojuego = ({ onGuardar }) => {
   }
 
   return (
-    <div>
-      <label>Titulo</label>
-      <input
-        type="text"
-        value={titulo}
-        onChange={(e)=> setTitulo(e.target.value)}
-      />
-      <label>Género</label>
-      <input
-        type="text"
-        value={genero}
-        onChange={(e)=> setGenero(e.target.value)}
-      />
-      <label>
-        Plataforma:
+    <div className="form-container">
+      <h2 className="form-title">
+        {videojuegoRecuperado ? "Editar Videojuego" : "Registrar Juego"}
+      </h2>
+
+      <div className="form-group">
+        <label>Título</label>
+        <input
+          type="text"
+          className="form-control"
+          value={titulo}
+          onChange={(e) => setTitulo(e.target.value)}
+        />
+      </div>
+
+      <div className="form-group">
+        <label>Género</label>
+        <input
+          type="text"
+          className="form-control"
+          value={genero}
+          onChange={(e) => setGenero(e.target.value)}
+        />
+      </div>
+
+      <div className="form-group">
+        <label>Plataforma</label>
         <select
+          className="form-control"
           value={plataforma}
           onChange={(e) => setPlataforma(e.target.value)}
         >
@@ -89,33 +103,53 @@ export const FormularioVideojuego = ({ onGuardar }) => {
           <option value="Xbox360">Xbox 360</option>
           <option value="PC">PC</option>
         </select>
-      </label>
-      <label>Lanzamiento</label>
-      <input
-        type="text"
-        value={lanzamiento}
-        onChange={(e) => setLanzamiento(e.target.value)}
-      />
-      <label>Precio</label>
-      <input
-        type="text"
-        value={precio}
-        onChange={(e) => setPrecio(e.target.value)}
-      />
-      <label>
-        Disponible?: <input type="checkbox" checked={disponible} onChange={(e) => setDisponible(e.target.checked)} />
-      </label>
-      <label>Progreso</label>
-      <input
-        type="text"
-        value={progreso}
-        onChange={(e) => setProgreso(e.target.value)}
-      />
+      </div>
 
-      <button onClick={manejarGuardar}> Guardar</button>
-      <button onClick={manejarCancelar}> Cancelar</button>
+      <div className="form-group">
+        <label>Lanzamiento</label>
+        <input
+          type="text"
+          className="form-control"
+          value={lanzamiento}
+          onChange={(e) => setLanzamiento(e.target.value)}
+        />
+      </div>
 
+      <div className="form-group">
+        <label>Precio</label>
+        <input
+          type="text"
+          className="form-control"
+          value={precio}
+          onChange={(e) => setPrecio(e.target.value)}
+        />
+      </div>
+
+      <div className="form-group checkbox-group">
+        <label className="checkbox-label">
+          <input
+            type="checkbox"
+            checked={disponible}
+            onChange={(e) => setDisponible(e.target.checked)}
+          />
+          ¿Disponible en stock?
+        </label>
+      </div>
+
+      <div className="form-group">
+        <label>Progreso (%)</label>
+        <input
+          type="text"
+          className="form-control"
+          value={progreso}
+          onChange={(e) => setProgreso(e.target.value)}
+        />
+      </div>
+
+      <div className="form-actions">
+        <button className="btn btn-save" onClick={manejarGuardar}>Guardar</button>
+        <button className="btn btn-cancel" onClick={manejarCancelar}>Cancelar</button>
+      </div>
     </div>
   )
-
 }

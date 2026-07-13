@@ -46,11 +46,23 @@ export const TablaVideojuegos = ({ videojuegos, onEliminar }) => {
                     </span>
                   </td>
                   <td data-label="Progreso">
-                    <BarraProgreso porcentaje={vid.progreso * 100} />
+                    <BarraProgreso porcentaje={vid.progreso} />
                   </td>
-                  <td>
-                    <button onClick={() => manejarEditar(vid)}>Editar</button>
-                    <button onClick={() => onEliminar(vid.id)}>Eliminar</button>
+                  <td data-label="Acciones">
+                    <div className="action-buttons">
+                      <button
+                        className="btn-action btn-edit"
+                        onClick={() => manejarEditar(vid)}
+                      >
+                        🕹️ Editar
+                      </button>
+                      <button
+                        className="btn-action btn-delete"
+                        onClick={() => onEliminar(vid.id)}
+                      >
+                        💥 Eliminar
+                      </button>
+                    </div>
                   </td>
                 </tr>
               ))

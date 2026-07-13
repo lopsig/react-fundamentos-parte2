@@ -7,7 +7,7 @@ export const data = [
     lanzamiento: 1998,
     precio: 19.99,
     disponible: true,
-    progreso: 1.0,
+    progreso: 100,
   },
   {
     id: 2,
@@ -17,7 +17,7 @@ export const data = [
     lanzamiento: 1999,
     precio: 19.99,
     disponible: true,
-    progreso: 0.5,
+    progreso: 50,
   },
   {
     id: 3,
@@ -37,7 +37,7 @@ export const data = [
     lanzamiento: 2000,
     precio: 14.99,
     disponible: true,
-    progreso: 0.75,
+    progreso: 75,
   },
   {
     id: 5,
@@ -47,7 +47,7 @@ export const data = [
     lanzamiento: 2005,
     precio: 29.99,
     disponible: true,
-    progreso: 1.0,
+    progreso: 100,
   },
   {
     id: 6,
@@ -57,7 +57,7 @@ export const data = [
     lanzamiento: 2007,
     precio: 29.99,
     disponible: true,
-    progreso: 0.4,
+    progreso: 40,
   },
   {
     id: 7,
@@ -67,7 +67,7 @@ export const data = [
     lanzamiento: 2010,
     precio: 39.99,
     disponible: true,
-    progreso: 0.15,
+    progreso: 15,
   },
   {
     id: 8,
@@ -77,7 +77,7 @@ export const data = [
     lanzamiento: 2006,
     precio: 19.99,
     disponible: true,
-    progreso: 0.9,
+    progreso: 90,
   },
   {
     id: 9,
@@ -107,7 +107,7 @@ export const data = [
     lanzamiento: 2002,
     precio: 29.99,
     disponible: true,
-    progreso: 0.65,
+    progreso: 65,
   },
   {
     id: 12,
@@ -117,7 +117,7 @@ export const data = [
     lanzamiento: 2001,
     precio: 34.99,
     disponible: true,
-    progreso: 0.3,
+    progreso: 30,
   },
   {
     id: 13,
@@ -127,7 +127,7 @@ export const data = [
     lanzamiento: 2014,
     precio: 19.99,
     disponible: true,
-    progreso: 0.45,
+    progreso: 45,
   },
   {
     id: 14,
@@ -137,7 +137,7 @@ export const data = [
     lanzamiento: 2010,
     precio: 14.99,
     disponible: true,
-    progreso: 0.8,
+    progreso: 80,
   },
   {
     id: 15,

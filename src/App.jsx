@@ -45,9 +45,6 @@ function App() {
     }
   } 
 
-  //! REVISAR PORQUE SE LLAMA AQUI AL FORMULARIO
-  <FormularioVideojuego />
-
 
 
   return (
