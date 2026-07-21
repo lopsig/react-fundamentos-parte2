@@ -116,6 +116,14 @@
   transform: scale(0.98);
 }
 
+.error-mensaje {
+  color: #e63946;
+  font-size: 0.85rem;
+  margin-top: 4px;
+  display: block;
+  font-weight: 500;
+}
+
 /* Mobile Responsiveness */
 @media screen and (max-width: 600px) {
   .form-container {

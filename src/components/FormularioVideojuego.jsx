@@ -19,6 +19,7 @@ export const FormularioVideojuego = ({ onGuardar }) => {
   const [progreso, setProgreso] = useState(0.0)
   const [sinopsis, setSinopsis] = useState("")
   const [calificacion, setCalificacion] = useState("")
+  const [errores, setErrores] = useState({})
 
   //# EFECTO
   useEffect(() => {
@@ -46,20 +47,66 @@ export const FormularioVideojuego = ({ onGuardar }) => {
     }
   
   }, [videojuegoRecuperado])
+
+  //# VALIDACIONES DE FORMULARIO
+  const validarFormulario = () => {
+    const nuevosErrores = {}
+
+    if (!titulo.trim()) {
+      nuevosErrores.titulo = "El título es obligatorio"
+    }
+    const numCalificacion = Number(calificacion)
+    if (!calificacion || isNaN(numCalificacion) || numCalificacion < 1 || numCalificacion > 100) {
+      nuevosErrores.calificacion = "La calificación debe ser un número estrictamente entre 1 y 100.";
+    }
+    if (sinopsis.trim().length < 10) {
+      nuevosErrores.sinopsis = "La sinopsis debe tener al menos 10 caracteres."
+    }
+    if (!genero.trim()) {
+      nuevosErrores.genero = "El género es obligatorio.";
+    }
+    if (!lanzamiento) {
+      nuevosErrores.lanzamiento = "La fecha de lanzamiento es obligatoria.";
+    } else if (lanzamiento > hoy) {
+      nuevosErrores.lanzamiento = "La fecha no puede ser futura.";
+    }
+    const numPrecio = Number(precio);
+    if (precio === "" || isNaN(numPrecio) || numPrecio < 0) {
+      nuevosErrores.precio = "El precio debe ser un número válido mayor o igual a 0.";
+    }
+    const numProgreso = Number(progreso);
+    if (progreso === "" || isNaN(numProgreso) || numProgreso < 0 || numProgreso > 100) {
+      nuevosErrores.progreso = "El progreso debe ser un porcentaje entre 0 y 100.";
+    }
+
+
+    return nuevosErrores
+  }
   
 
   //# MANEJAR GUARDAR
-  const manejarGuardar = () => {
+  const manejarGuardar = (e) => {
+    e.preventDefault()
+    
+    const erroresActivos = validarFormulario()
+
+    if (Object.keys(erroresActivos).length > 0) {
+      setErrores(erroresActivos)
+      return
+    }
+
+    setErrores({})
+    
     const videojuego = {
       id: videojuegoRecuperado?.id ? videojuegoRecuperado.id : Date.now(),
-      titulo: titulo,
-      genero: genero,
+      titulo: titulo.trim(),
+      genero: genero.trim(),
       plataforma: plataforma,
       lanzamiento: lanzamiento,
-      precio: precio,
+      precio: Number(precio),
       disponible: disponible,
-      progreso: progreso,
-      sinopsis: sinopsis,
+      progreso: Number(progreso),
+      sinopsis: sinopsis.trim(),
       calificacion : Number(calificacion)
     }
 
@@ -73,7 +120,7 @@ export const FormularioVideojuego = ({ onGuardar }) => {
   }
 
   return (
-    <div className="form-container">
+    <form className="form-container" onSubmit={manejarGuardar}>
       <h2 className="form-title">
         {videojuegoRecuperado ? "Editar Videojuego" : "Registrar Juego"}
       </h2>
@@ -86,6 +133,7 @@ export const FormularioVideojuego = ({ onGuardar }) => {
           value={titulo}
           onChange={(e) => setTitulo(e.target.value)}
         />
+        {errores.titulo && <span className="error-mensaje">{ errores.titulo }</span>}
       </div>
 
       <div className="form-group">
@@ -96,6 +144,7 @@ export const FormularioVideojuego = ({ onGuardar }) => {
           value={genero}
           onChange={(e) => setGenero(e.target.value)}
         />
+        {errores.genero && <span className="error-mensaje">{errores.genero}</span>}
       </div>
 
       <div className="form-group">
@@ -123,6 +172,7 @@ export const FormularioVideojuego = ({ onGuardar }) => {
           value={lanzamiento}
           onChange={(e) => setLanzamiento(e.target.value)}
         />
+        {errores.lanzamiento && <span className="error-mensaje">{errores.lanzamiento}</span>}
       </div>
 
       <div className="form-group">
@@ -135,12 +185,13 @@ export const FormularioVideojuego = ({ onGuardar }) => {
           value={sinopsis}
           onChange={(e) => setSinopsis(e.target.value)}
         ></textarea>
+        {errores.sinopsis && <span className="error-mensaje">{ errores.sinopsis}</span>}
       </div>
 
       <div className="form-group">
         <label>Calificación (1 - 100)</label>
         <input
-          type="text"
+          type="number"
           className="form-control"
           min={1}
           max={100}
@@ -148,6 +199,7 @@ export const FormularioVideojuego = ({ onGuardar }) => {
           value={calificacion}
           onChange={(e) => setCalificacion(e.target.value)}
         />
+        {errores.calificacion && <span className="error-mensaje">{ errores.calificacion}</span>}
       </div>
 
       <div className="form-group">
@@ -158,6 +210,7 @@ export const FormularioVideojuego = ({ onGuardar }) => {
           value={precio}
           onChange={(e) => setPrecio(e.target.value)}
         />
+        {errores.precio && <span className="error-mensaje">{errores.precio}</span>}
       </div>
 
       <div className="form-group checkbox-group">
@@ -179,12 +232,13 @@ export const FormularioVideojuego = ({ onGuardar }) => {
           value={progreso}
           onChange={(e) => setProgreso(e.target.value)}
         />
+        {errores.progreso && <span className="error-mensaje">{errores.progreso}</span>}
       </div>
 
       <div className="form-actions">
-        <button className="btn btn-save" onClick={manejarGuardar}>Guardar</button>
-        <button className="btn btn-cancel" onClick={manejarCancelar}>Cancelar</button>
+        <button type="submit" className="btn btn-save" >Guardar</button>
+        <button type="button" className="btn btn-cancel" onClick={manejarCancelar}>Cancelar</button>
       </div>
-    </div>
+    </form>
   )
 }
