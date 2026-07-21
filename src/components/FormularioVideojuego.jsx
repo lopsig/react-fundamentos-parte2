@@ -7,6 +7,7 @@ export const FormularioVideojuego = ({ onGuardar }) => {
   const location = useLocation();
   const navigate = useNavigate();
   const videojuegoRecuperado = location.state?.videojuego || null
+  const hoy = new Date().toISOString().split("T")[0]
 
   //# ESTADOS
   const [titulo, setTitulo] = useState("")
@@ -16,6 +17,8 @@ export const FormularioVideojuego = ({ onGuardar }) => {
   const [precio, setPrecio] = useState("")
   const [disponible, setDisponible] = useState(true)
   const [progreso, setProgreso] = useState(0.0)
+  const [sinopsis, setSinopsis] = useState("")
+  const [calificacion, setCalificacion] = useState("")
 
   //# EFECTO
   useEffect(() => {
@@ -28,6 +31,8 @@ export const FormularioVideojuego = ({ onGuardar }) => {
       setPrecio(videojuegoRecuperado.precio)
       setDisponible(videojuegoRecuperado.disponible)
       setProgreso(videojuegoRecuperado.progreso)
+      setSinopsis(videojuegoRecuperado.sinopsis)
+      setCalificacion(videojuegoRecuperado.calificacion)
     } else {
       setTitulo("")
       setGenero("")
@@ -36,6 +41,8 @@ export const FormularioVideojuego = ({ onGuardar }) => {
       setPrecio("")
       setDisponible(true)
       setProgreso(0)
+      setSinopsis("")
+      setCalificacion("")
     }
   
   }, [videojuegoRecuperado])
@@ -44,14 +51,16 @@ export const FormularioVideojuego = ({ onGuardar }) => {
   //# MANEJAR GUARDAR
   const manejarGuardar = () => {
     const videojuego = {
-      id: videojuegoRecuperado !== null && videojuegoRecuperado !== undefined ? videojuegoRecuperado.id : Date.now(),
+      id: videojuegoRecuperado?.id ? videojuegoRecuperado.id : Date.now(),
       titulo: titulo,
       genero: genero,
       plataforma: plataforma,
       lanzamiento: lanzamiento,
       precio: precio,
       disponible: disponible,
-      progreso: progreso
+      progreso: progreso,
+      sinopsis: sinopsis,
+      calificacion : Number(calificacion)
     }
 
     onGuardar(videojuego)
@@ -106,19 +115,45 @@ export const FormularioVideojuego = ({ onGuardar }) => {
       </div>
 
       <div className="form-group">
-        <label>Lanzamiento</label>
+        <label>Fecha de Lanzamiento</label>
         <input
-          type="text"
+          type="date"
           className="form-control"
+          max={hoy}
           value={lanzamiento}
           onChange={(e) => setLanzamiento(e.target.value)}
         />
       </div>
 
       <div className="form-group">
-        <label>Precio</label>
+        <label>Sinopsis</label>
+        <textarea
+          className="form-control"
+          minLength={10}
+          maxLength={250}
+          placeholder="Escribe una breve reseña (10 - 250 caracteres)..."
+          value={sinopsis}
+          onChange={(e) => setSinopsis(e.target.value)}
+        ></textarea>
+      </div>
+
+      <div className="form-group">
+        <label>Calificación (1 - 100)</label>
         <input
           type="text"
+          className="form-control"
+          min={1}
+          max={100}
+          placeholder="Ej: 85"
+          value={calificacion}
+          onChange={(e) => setCalificacion(e.target.value)}
+        />
+      </div>
+
+      <div className="form-group">
+        <label>Precio</label>
+        <input
+          type="number"
           className="form-control"
           value={precio}
           onChange={(e) => setPrecio(e.target.value)}
