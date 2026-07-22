@@ -23,10 +23,12 @@ export const TablaVideojuegos = ({ videojuegos, onEliminar }) => {
             <tr>
               <th>Título</th>
               <th>Género</th>
+              <th>Sinopsis</th>
               <th>Plataforma</th>
               <th>Lanzamiento</th>
               <th>Precio</th>
               <th>Disponibilidad</th>
+              <th>Calificación</th>
               <th>Progreso</th>
               <th>Acciones</th>
             </tr>
@@ -37,6 +39,7 @@ export const TablaVideojuegos = ({ videojuegos, onEliminar }) => {
                 <tr key={vid.id}>
                   <td data-label="Título" className="game-title">{vid.titulo}</td>
                   <td data-label="Género">{vid.genero}</td>
+                  <td data-label="Sinopsis"><p>{vid.sinopsis}</p></td>
                   <td data-label="Plataforma"><span className="badge platform">{vid.plataforma}</span></td>
                   <td data-label="Lanzamiento">{vid.lanzamiento}</td>
                   <td data-label="Precio" className="game-price">${vid.precio}</td>
@@ -45,6 +48,7 @@ export const TablaVideojuegos = ({ videojuegos, onEliminar }) => {
                       {vid.disponible ? 'Disponible' : 'Agotado'}
                     </span>
                   </td>
+                  <td data-label="Calificacion">{vid.calificacion }</td>
                   <td data-label="Progreso">
                     <BarraProgreso porcentaje={vid.progreso} />
                   </td>

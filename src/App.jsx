@@ -1,5 +1,5 @@
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import './App.css'
 import { TablaVideojuegos } from './components/TablaVideojuegos.jsx'
 import { data } from './data/videojuegos.js'
@@ -7,9 +7,24 @@ import { FormularioVideojuego } from './components/FormularioVideojuego.jsx'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import { Navbar } from './components/Navbar.jsx'
 import { PaginaNoEncontrada} from './components/PaginaNoEncontrada.jsx'
+import { AlertaNotificacion } from './components/AlertaNotificacion.jsx'
 
 function App() {
-  const [videojuegos, setVideojuegos] = useState(data)
+  const [videojuegos, setVideojuegos] = useState(() => {
+    const datosGuardados = localStorage.getItem("lista_videojuegos");
+    return datosGuardados ? JSON.parse(datosGuardados) : data
+  })
+
+  const [notificacion, setNotificacion] = useState("");
+
+  const mostrarNotificacion = (msg) => {
+    setNotificacion(msg);
+  };
+
+  //# USE EFFECT
+  useEffect(() => {
+    localStorage.setItem("lista_videojuegos", JSON.stringify(videojuegos))
+  }, [videojuegos])
   
   //# FUNCION NUEVO VIDEOJUEGO
   const agregarVideojuego = (nuevoVideojuego) => {
@@ -20,6 +35,7 @@ function App() {
   const eliminarVideojuego = (id) => {
     const videojuegosFiltrados = videojuegos.filter((vid) => vid.id !== id)
     setVideojuegos(videojuegosFiltrados)
+    mostrarNotificacion("Videojuego eliminado con éxito")
   }
 
   //# FUNCION EDITAR VIDEOJUEGO
@@ -40,15 +56,25 @@ function App() {
     
     if (exist) {
       editarVideojuego(videojuego)
+      mostrarNotificacion("Videojuego actualizado con éxcito")
     } else {
       agregarVideojuego(videojuego)
+      mostrarNotificacion("Videojuego registrado con éxito")
     }
-  } 
+  }
+
+
 
 
 
   return (
     <BrowserRouter>
+      {notificacion && (
+        <AlertaNotificacion
+          mensaje={notificacion}
+          onClose={()=>setNotificacion("")}
+        />
+      )}
       <Navbar />
       <Routes>
         <Route
