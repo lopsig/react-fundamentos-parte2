@@ -10,7 +10,7 @@ export const data = [
     progreso: 100,
     sinopsis:
       "Leon S. Kennedy y Claire Redfield intentan escapar de Raccoon City infestada de zombis.",
-    calificacion: 89,
+    calificacion: 97,
   },
   {
     id: 2,
@@ -23,7 +23,7 @@ export const data = [
     progreso: 50,
     sinopsis:
       "Jill Valentine intenta escapar de Raccoon City mientras es perseguida por la bio-arma Nemesis.",
-    calificacion: 79,
+    calificacion: 100,
   },
   {
     id: 3,
@@ -36,7 +36,7 @@ export const data = [
     progreso: 0.0,
     sinopsis:
       "Regina y su equipo investigan una instalación secreta infestada de dinosaurios letales.",
-    calificacion: 82,
+    calificacion: 97,
   },
   {
     id: 4,
@@ -49,7 +49,7 @@ export const data = [
     progreso: 75,
     sinopsis:
       "Una misión de rescate en el tiempo donde el equipo enfrenta hordas masivas de dinosaurios.",
-    calificacion: 86,
+    calificacion: 100,
   },
   {
     id: 5,

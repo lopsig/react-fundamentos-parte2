@@ -1,8 +1,8 @@
 :root {
-  --arcade-bg: #111827;        /* Deep dark background */
-  --card-bg: #1f2937;          /* Dark gray for table container */
-  --neon-purple: #f7f455;      /* Retro neon color modificado a amarillo */
-  --neon-cyan: #06b6d4;        /* Retro cyan color */
+  --arcade-bg: #111827;
+  --card-bg: #1f2937;
+  --neon-purple: #f7f455;
+  --neon-cyan: #06b6d4;
   --text-light: #f3f4f6;
   --text-muted: #9ca3af;
 }
@@ -11,17 +11,15 @@
   font-family: system-ui, -apple-system, sans-serif;
   background-color: var(--arcade-bg);
   color: var(--text-light);
-  padding: 2rem;
-  border-radius: 12px;
-  max-width: 1200px;
-  margin: 2rem auto;
-  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+  padding: 2rem 1rem;
+  max-width: 1300px;
+  margin: 0 auto;
 }
 
 /* Header Styles */
 .game-header {
   text-align: center;
-  margin-bottom: 2rem;
+  margin-bottom: 2.5rem;
 }
 
 .game-header h1 {
@@ -40,97 +38,167 @@
   margin-top: 0.5rem;
 }
 
-/* Table Wrapper */
-.game-table-wrapper {
+/* --- GRID DE TARJETAS --- */
+.game-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 1.5rem;
+}
+
+/* Tarjeta Individual */
+.game-card {
   background-color: var(--card-bg);
-  border-radius: 8px;
-  overflow: hidden;
   border: 1px solid #374151;
+  border-radius: 12px;
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
 }
 
-.game-table {
-  width: 100%;
-  border-collapse: collapse;
-  text-align: left;
+.game-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--neon-cyan);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4), 0 0 12px rgba(6, 182, 212, 0.2);
 }
 
-.game-table th {
-  background-color: #111827;
-  color: var(--neon-purple);
-  font-weight: 600;
-  text-transform: uppercase;
-  font-size: 0.85rem;
-  letter-spacing: 0.05em;
-  padding: 1rem;
-  border-bottom: 2px solid #374151;
-}
-
-.game-table td {
-  padding: 1rem;
-  border-bottom: 1px solid #374151;
-  font-size: 0.95rem;
-}
-
-.game-table tbody tr:hover {
-  background-color: #2563eb1a; /* Subtle neon blue highlight on hover */
-}
-
-/* Special Columns Custom Styling */
-.game-title {
-  font-weight: 600;
-  color: #ffffff;
-}
-
-.game-price {
-  font-family: monospace;
-  font-size: 1.05rem;
-  color: #10b981; /* Green for money */
+/* Header de la Tarjeta */
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
 }
 
 .badge.platform {
   background-color: #374151;
-  padding: 0.25rem 0.5rem;
-  border-radius: 4px;
-  font-size: 0.8rem;
+  color: #e5e7eb;
+  padding: 0.3rem 0.6rem;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
 }
 
-/* Status Availability */
 .status {
   padding: 0.25rem 0.6rem;
   border-radius: 9999px;
-  font-size: 0.8rem;
-  font-weight: 500;
+  font-size: 0.75rem;
+  font-weight: 600;
 }
 .status.in-stock {
-  background-color: #065f46;
+  background-color: rgba(6, 95, 70, 0.5);
   color: #34d399;
+  border: 1px solid #059669;
 }
 .status.out-of-stock {
-  background-color: #991b1b;
+  background-color: rgba(153, 27, 27, 0.5);
   color: #f87171;
+  border: 1px solid #dc2626;
 }
 
-/* --- Action Buttons Container --- */
-.action-buttons {
+/* Cuerpo de la Tarjeta */
+.card-body {
+  margin-bottom: 1rem;
+}
+
+.game-title {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0 0 0.25rem 0;
+}
+
+.game-genre {
+  font-size: 0.85rem;
+  color: var(--neon-purple);
+  margin: 0 0 0.75rem 0;
+  font-weight: 500;
+}
+
+.game-synopsis {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  line-height: 1.4;
+  margin: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 3; /* Limita la sinopsis a 3 líneas para homogeneidad */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Detalles (Lanzamiento, Calificación, Precio) */
+.card-details {
   display: flex;
-  gap: 0.5rem;
-  justify-content: flex-start;
+  justify-content: space-between;
+  background-color: #111827;
+  padding: 0.75rem;
+  border-radius: 8px;
+  margin-bottom: 1rem;
 }
 
-/* Base style for action buttons */
+.detail-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.detail-label {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  font-weight: 600;
+  letter-spacing: 0.05em;
+}
+
+.detail-value {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #f3f4f6;
+}
+
+.detail-value.score {
+  color: #facc15;
+}
+
+.game-price {
+  font-family: monospace;
+  font-size: 0.95rem;
+  color: #10b981;
+}
+
+/* Barra de Progreso */
+.card-progress {
+  margin-bottom: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+/* Botones de Acción */
+.card-actions {
+  display: flex;
+  gap: 0.75rem;
+}
+
 .btn-action {
-  padding: 0.4rem 0.8rem;
+  flex: 1;
+  padding: 0.5rem;
   font-size: 0.85rem;
   font-weight: 600;
   border: none;
-  border-radius: 4px;
+  border-radius: 6px;
   cursor: pointer;
   transition: all 0.2s ease;
   text-transform: uppercase;
   letter-spacing: 0.05em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.3rem;
 }
 
-/* Edit Button Style (Neon Cyan theme) */
 .btn-edit {
   background-color: rgba(6, 182, 212, 0.1);
   border: 1px solid #06b6d4;
@@ -140,10 +208,9 @@
 .btn-edit:hover {
   background-color: #06b6d4;
   color: #111827;
-  box-shadow: 0 0 10px rgba(6, 182, 212, 0.5);
+  box-shadow: 0 0 10px rgba(6, 182, 212, 0.4);
 }
 
-/* Delete Button Style (Laser Red theme) */
 .btn-delete {
   background-color: rgba(239, 68, 68, 0.1);
   border: 1px solid #ef4444;
@@ -153,80 +220,16 @@
 .btn-delete:hover {
   background-color: #ef4444;
   color: #ffffff;
-  box-shadow: 0 0 10px rgba(239, 68, 68, 0.5);
+  box-shadow: 0 0 10px rgba(239, 68, 68, 0.4);
 }
 
-/* Subtle click animation */
 .btn-action:active {
-  transform: scale(0.95);
+  transform: scale(0.96);
 }
 
-/* --- Responsive Layout (Mobile Cards) --- */
-@media screen and (max-width: 768px) {
-  /* Reduce container padding so we have more horizontal space */
-  .game-container {
-    padding: 1rem 0.5rem;
-    margin: 1rem;
-  }
-
-  .game-table thead {
-    display: none;
-  }
-
-  .game-table, .game-table tbody, .game-table tr, .game-table td {
-    display: block;
-    width: 100%;
-    box-sizing: border-box; /* Ensures padding doesn't cause overflow */
-  }
-
-  .game-table tr {
-    border: 1px solid #374151;
-    border-radius: 8px;
-    margin-bottom: 1rem;
-    padding: 0.5rem 0;
-    background-color: var(--card-bg);
-  }
-
-  .game-table td {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 1px dashed #374151;
-    padding: 0.75rem 1rem;
-    text-align: right;
-    gap: 1rem; /* Adds a safe gap between the label and the value */
-  }
-
-  .game-table td:last-child {
-    border-bottom: none;
-  }
-
-  /* Make sure long text wraps to the next line instead of cutting off */
-  .game-title, .game-table td {
-    word-break: break-word; 
-    white-space: normal;
-  }
-
-  .game-table td::before {
-    content: attr(data-label);
-    font-weight: 600;
-    color: var(--neon-purple);
-    text-transform: uppercase;
-    font-size: 0.8rem;
-    text-align: left;
-    min-width: 100px; /* Gives the label a fixed minimum space */
-    flex-shrink: 0;   /* Prevents the label from squishing */
-  }
-
-  /* Fix progress container width for mobile */
-  .progress-container {
-    width: 100%;
-    max-width: 180px; /* Limits the bar size so it doesn't crowd out space */
-    justify-content: flex-end;
-  }
-
-  .action-buttons {
-    width: 100%;
-    justify-content: flex-end; /* Aligns buttons right inside mobile cards */
+/* Responsive Ajustes */
+@media screen and (max-width: 480px) {
+  .game-cards-grid {
+    grid-template-columns: 1fr; /* Una sola columna en pantallas muy pequeñas */
   }
 }

@@ -17,62 +17,66 @@ export const TablaVideojuegos = ({ videojuegos, onEliminar }) => {
         </div>
       </div>
 
-      <div className="game-table-wrapper">
-        <table className="game-table">
-          <thead>
-            <tr>
-              <th>Título</th>
-              <th>Género</th>
-              <th>Sinopsis</th>
-              <th>Plataforma</th>
-              <th>Lanzamiento</th>
-              <th>Precio</th>
-              <th>Disponibilidad</th>
-              <th>Calificación</th>
-              <th>Progreso</th>
-              <th>Acciones</th>
-            </tr>
-          </thead>
-          <tbody>
-            {
-              videojuegos.map((vid) => (
-                <tr key={vid.id}>
-                  <td data-label="Título" className="game-title">{vid.titulo}</td>
-                  <td data-label="Género">{vid.genero}</td>
-                  <td data-label="Sinopsis"><p>{vid.sinopsis}</p></td>
-                  <td data-label="Plataforma"><span className="badge platform">{vid.plataforma}</span></td>
-                  <td data-label="Lanzamiento">{vid.lanzamiento}</td>
-                  <td data-label="Precio" className="game-price">${vid.precio}</td>
-                  <td data-label="Disponibilidad">
-                    <span className={`status ${vid.disponible ? 'in-stock' : 'out-of-stock'}`}>
-                      {vid.disponible ? 'Disponible' : 'Agotado'}
-                    </span>
-                  </td>
-                  <td data-label="Calificacion">{vid.calificacion }</td>
-                  <td data-label="Progreso">
-                    <BarraProgreso porcentaje={vid.progreso} />
-                  </td>
-                  <td data-label="Acciones">
-                    <div className="action-buttons">
-                      <button
-                        className="btn-action btn-edit"
-                        onClick={() => manejarEditar(vid)}
-                      >
-                        🕹️ Editar
-                      </button>
-                      <button
-                        className="btn-action btn-delete"
-                        onClick={() => onEliminar(vid.id)}
-                      >
-                        💥 Eliminar
-                      </button>
-                    </div>
-                  </td>
-                </tr>
-              ))
-            }
-          </tbody>
-        </table>
+      {/* Grid de Tarjetas */}
+      <div className="game-cards-grid">
+        {videojuegos.map((vid) => (
+          <div className="game-card" key={vid.id}>
+
+            {/* Encabezado de la Tarjeta */}
+            <div className="card-header">
+              <span className="badge platform">{vid.plataforma}</span>
+              <span className={`status ${vid.disponible ? 'in-stock' : 'out-of-stock'}`}>
+                {vid.disponible ? 'Disponible' : 'Agotado'}
+              </span>
+            </div>
+
+            {/* Contenido Principal */}
+            <div className="card-body">
+              <h3 className="game-title">{vid.titulo}</h3>
+              <p className="game-genre">🎮 {vid.genero}</p>
+              <p className="game-synopsis">{vid.sinopsis}</p>
+            </div>
+
+            {/* Detalles (Lanzamiento, Precio y Calificación) */}
+            <div className="card-details">
+              <div className="detail-item">
+                <span className="detail-label">Lanzamiento</span>
+                <span className="detail-value">{vid.lanzamiento}</span>
+              </div>
+              <div className="detail-item">
+                <span className="detail-label">Calificación</span>
+                <span className="detail-value score">⭐ {vid.calificacion}/100</span>
+              </div>
+              <div className="detail-item">
+                <span className="detail-label">Precio</span>
+                <span className="detail-value game-price">${vid.precio}</span>
+              </div>
+            </div>
+
+            {/* Barra de Progreso */}
+            <div className="card-progress">
+              <span className="detail-label">Progreso del Juego</span>
+              <BarraProgreso porcentaje={vid.progreso} />
+            </div>
+
+            {/* Acciones */}
+            <div className="card-actions">
+              <button
+                className="btn-action btn-edit"
+                onClick={() => manejarEditar(vid)}
+              >
+                🕹️ Editar
+              </button>
+              <button
+                className="btn-action btn-delete"
+                onClick={() => onEliminar(vid.id)}
+              >
+                💥 Eliminar
+              </button>
+            </div>
+
+          </div>
+        ))}
       </div>
     </div>
   )
