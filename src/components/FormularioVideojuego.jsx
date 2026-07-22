@@ -67,9 +67,18 @@ export const FormularioVideojuego = ({ onGuardar }) => {
     }
     if (!lanzamiento) {
       nuevosErrores.lanzamiento = "La fecha de lanzamiento es obligatoria.";
-    } else if (lanzamiento > hoy) {
-      nuevosErrores.lanzamiento = "La fecha no puede ser futura.";
+    } else {
+      const [yearL, monthL, dayL] = lanzamiento.split('-').map(Number)
+      const fechaSeleccionada = new Date(yearL, monthL - 1, dayL)
+
+      const fechaActual = new Date()
+      fechaActual.setHours(0, 0, 0, 0)
+
+      if (fechaSeleccionada > fechaActual) {
+        nuevosErrores.lanzamiento = "La fecha de lanzamiento no puede ser futura."
+      }
     }
+    
     const numPrecio = Number(precio);
     if (precio === "" || isNaN(numPrecio) || numPrecio < 0) {
       nuevosErrores.precio = "El precio debe ser un número válido mayor o igual a 0.";
