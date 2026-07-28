@@ -156,6 +156,8 @@ export const FormularioVideojuego = ({ onGuardar }) => {
         {errores.genero && <span className="error-mensaje">{errores.genero}</span>}
       </div>
 
+      
+      //! AQUI SE ENCUENTRA LAS LISTAS DESPLEGABLES
       <div className="form-group">
         <label>Plataforma</label>
         <select
